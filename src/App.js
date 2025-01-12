@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import io from 'socket.io-client';
 import React, { useEffect,useState } from 'react';
 import { useSocket } from ".//context/SocketProvider";
+import Video from './Video';
 
 // const socket = io('http://localhost:4000');
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Row>{messageReceive_message}</Row>
         </Col>
        </Row>
+       <Video />
     </Container>
 
   );
