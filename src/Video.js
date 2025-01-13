@@ -16,9 +16,36 @@ const Video = () => {
       video: true,
     });
     const offer = await peer.getOffer();
-    // socket.emit("user:call", { to: remoteSocketId, offer });
+    socket.emit("call", { offer });
     setMyStream(stream);
   }, [socket]);
+  
+  const handleIncommingCall = useCallback(
+    async ({ offer }) => {
+      // setRemoteSocketId(from);
+      // const stream = await navigator.mediaDevices.getUserMedia({
+      //   audio: true,
+      //   video: true,
+      // });
+      // setMyStream(stream);
+      // console.log(`Incoming Call`, from, offer);
+      // const ans = await peer.getAnswer(offer);
+      // socket.emit("call:accepted", { to: from, ans });
+      console.log("incoming call", offer);
+    },
+    [socket]
+  );
+
+  useEffect(() => {
+    socket.on("incoming_call", handleIncommingCall);
+
+    return () => {
+      socket.off("incoming_call", handleIncommingCall);
+    };
+  }, [
+    socket,
+    handleCallUser,
+    handleIncommingCall,]);
 
   return(
     <>
