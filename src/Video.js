@@ -18,14 +18,12 @@ const Video = () => {
 
   // Handle device selection
   const handleDeviceChange = (event) => {
-    console.log(event.target.value);
     setSelectedDeviceId(event.target.value);
   };
 
 
 
   const handleCallUser = useCallback(async () => {
-    console.log(selectedDeviceId);
     if (myStream) {
       // Stop any active stream before starting a new one
       await myStream.getTracks().forEach((track) => track.stop());
